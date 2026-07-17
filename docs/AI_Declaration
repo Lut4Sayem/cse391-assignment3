@@ -1,0 +1,108 @@
+============================================================
+AI USAGE DECLARATION
+============================================================
+
+Name: MD. LUTFUR RAHMAN
+Student ID: 23101029
+Assignment: 03
+Date: 18/07/2026
+
+---
+
+1. AI TOOLS USED (check all that apply)
+
+---
+
+[ ] None
+[✅] ChatGPT
+[ ] GitHub Copilot
+[ ] Google Gemini
+[✅] Claude
+[ ] Cursor
+[ ] Other: ******\_\_\_\_******
+
+---
+
+2. PURPOSE OF AI USE (check all that apply)
+
+---
+
+[✅] Learning/understanding concepts
+[✅] Debugging my code
+[✅] Generating code snippets
+[✅] Writing text content
+[✅] Design/styling ideas
+[ ] Image generation
+[ ] Other: ******\_\_\_\_******
+
+---
+
+3. DESCRIPTION OF AI USE
+
+---
+
+AI tools were used to support learning, debugging, and improving the overall
+quality of the project. I used AI for:
+
+- Understanding and applying semantic HTML structure and clean page layouts
+  (navbar/hero split layout, cards, grids).
+- CSS design guidance (color palette selection, typography pairing, responsive
+  layout, admin dashboard/table styling, consistent component styling).
+- Debugging PHP/SQL/AJAX issues (e.g., fixing SQL syntax mistakes, ensuring JSON
+  output is valid, improving error handling pages).
+- Improving beginner-friendly implementation of JavaScript logic for progressive
+  form disclosure and dynamic mechanic availability (AJAX).
+- Drafting and refining project documentation (README content).
+
+All final implementation decisions, project structure, integration, and testing
+were performed by me. I reviewed all AI-assisted suggestions, modified them as
+needed, and ensured I understand every part of the submitted code.
+
+---
+
+4. AI-ASSISTED SECTIONS
+
+---
+
+List specific files/sections where AI helped significantly:
+
+File: index.php
+Section: UI structure for split hero (left text + right form), progressive form
+disclosure (Step 1 / Step 2) behavior and UX.
+
+File: css/styles.css
+Section: Theme styling (Hollywood cinematic look), navbar styling consistency,
+form styling, dropdown styling, admin dashboard/table styling, responsive
+adjustments, sticky footer layout guidance.
+
+File: get_mechanic_slots.php
+Section: SQL query debugging (JOIN/COUNT logic), returning mechanic specialty and
+availability data in JSON, fixing query issues.
+
+File: admin/index.php
+Section: Admin UI layout improvements (control-room style table/stats design).
+
+File: admin/edit_appointment.php, admin/update_appointment.php
+Section: Styling the edit form and adding a styled error page instead of raw die().
+
+File: mechanics.php, help.php
+Section: Page layout ideas (mechanics cards + FAQ page structure).
+
+File: README.md
+Section: Structuring documentation and describing features clearly.
+
+---
+
+5. DECLARATION
+
+---
+
+I declare that:
+
+- This disclosure is complete and accurate
+- I understand all code in my submission
+- I can explain and modify my work if asked
+- I take full responsibility for my submission
+
+Signature: MD. LUTFUR RAHMAN
+Date: 18/07/2026
