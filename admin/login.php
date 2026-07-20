@@ -13,7 +13,7 @@ $error = "";
 
 // Change these two (quick setup)
 $ADMIN_USERNAME = "admin";
-$ADMIN_PASSWORD = "hollywood123"; // change this before submission
+$ADMIN_PASSWORD = "hollywood123"; 
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username = trim($_POST["username"] ?? "");
