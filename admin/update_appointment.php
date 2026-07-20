@@ -1,4 +1,5 @@
 <?php
+require_once 'auth.php';
 include '../db.php';
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
@@ -73,6 +74,7 @@ function showError($message)
             <div>
                 <a href="../index.php">Home</a>
                 <a href="index.php">Admin</a>
+                <a href="logout.php">Logout</a>
             </div>
         </div>
 

@@ -1,4 +1,5 @@
 <?php
+require_once 'auth.php';
 include '../db.php';
 
 // Get appointment ID safely
@@ -49,6 +50,7 @@ $mechanics_result = $conn->query("SELECT id, name FROM mechanics");
             <a href="../index.php">Home</a>
             <a href="../mechanics.php">Mechanics</a>
             <a href="index.php">Admin</a>
+            <a href="logout.php">Logout</a>
             <a href="../help.php">Help</a>
         </div>
     </div>
