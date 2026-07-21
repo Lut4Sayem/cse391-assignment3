@@ -116,7 +116,7 @@ include 'db.php';
         &copy; <?php echo date("Y"); ?> Hollywood Car Workshop. All rights reserved.
     </footer>
 
-    <!-- JavaScript (unchanged) -->
+    <!-- JavaScript -->
     <script>
         // ===== Progressive Disclosure Logic =====
         const continueBtn = document.getElementById('continueBtn');
