@@ -20,27 +20,27 @@ $mechanic_id      = $_POST['mechanic_id'];
 
 // 3. Validation: Check existing fields
 if (empty($client_name)) {
-    die("Error: Client Name cannot be empty.");
+    showMessage("error", "Validation Failed", "Client Name cannot be empty.");
 }
 
 if (!ctype_digit($phone)) {
-    die("Error: Phone number must contain only numbers.");
+    showMessage("error", "Validation Failed", "Phone number must contain only numbers.");
 }
 
 if (!ctype_digit($car_engine)) {
-    die("Error: Car Engine must contain only numbers.");
+    showMessage("error", "Validation Failed", "Car Engine must contain only numbers.");
 }
 
 if (empty($car_license)) {
-    die("Error: Car License Number cannot be empty.");
+    showMessage("error", "Validation Failed", "Car License Number cannot be empty.");
 }
 
 if (empty($appointment_date)) {
-    die("Error: Appointment Date must be selected.");
+    showMessage("error", "Validation Failed", "Appointment Date must be selected.");
 }
 
 if (empty($mechanic_id)) {
-    die("Error: You must select a mechanic.");
+    showMessage("error", "Validation Failed", "You must select a mechanic.");
 }
 
 
@@ -60,7 +60,7 @@ $row_check = $result_check->fetch_assoc();
 
 // Step F: Stop the script if the database count is 1 or more
 if ($row_check['total_booked'] > 0) {
-    die("Error: You have already scheduled an appointment for this date.");
+    showMessage("error", "Duplicate Booking", "You have already scheduled an appointment on this date with this car license.");
 }
 $stmt_check->close();
 
@@ -77,7 +77,7 @@ $row_check2 = $result_check2->fetch_assoc();
 
 // Step C: If mechanic already has 4 or more appointments, stop execution
 if ($row_check2['total_slots'] >= 4) {
-    die("Error: This mechanic is fully booked on this date.");
+    showMessage("error", "Mechanic Unavailable", "This mechanic is fully booked on the selected date. Please choose another mechanic or date.");
 }
 $stmt_check2->close();
 
@@ -96,11 +96,120 @@ if (empty($address)) {
 }
 // Execute the insertion and check if it worked!:
 if ($stmt_insert->execute()) {
-    echo "<h2>Success! Your appointment has been booked.</h2>";
-    echo "<p>Thank you, " . htmlspecialchars($client_name) . ".</p>";
-    echo "<a href='index.php'>Book Another Appointment</a>";
+    // SUCCESS
+    showMessage("success", "Appointment Confirmed!", "Thank you, " . htmlspecialchars($client_name) . ". Your appointment has been booked successfully.");
 } else {
     // If the database crashes or hits an unexpected system issue
-    echo "Error saving appointment: " . $stmt_insert->error;
+    showMessage("error", "System Error", "Error saving appointment: " . $stmt_insert->error);
 }
 $stmt_insert->close();
+
+
+/* =====================================================
+   PAGE RENDERER FUNCTION
+   Displays a themed success or error page
+   Does NOT change any business logic above
+===================================================== */
+function showMessage($type, $title, $message)
+{
+?>
+    <!DOCTYPE html>
+    <html>
+
+    <head>
+        <title><?php echo htmlspecialchars($title); ?> | Hollywood Car Workshop</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@400;500;600;700&family=Staatliches&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/styles.css">
+    </head>
+
+    <body>
+
+        <!-- Navbar -->
+        <div class="navbar navbar-solid">
+            <a href="index.php" class="brand">
+                <img src="images/logo.png" alt="Logo" class="brand-logo">
+                <span class="brand-text">Hollywood Car Workshop</span>
+            </a>
+            <div>
+                <a href="index.php">Home</a>
+                <a href="mechanics.php">Mechanics</a>
+                <a href="help.php">Help</a>
+                <a href="admin/index.php">Admin</a>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="page-content">
+            <div class="feedback-container">
+                <div class="feedback-card <?php echo $type === 'success' ? 'feedback-success' : 'feedback-error'; ?>">
+
+                    <!-- Icon -->
+                    <div class="feedback-icon">
+                        <?php echo $type === 'success' ? '✅' : '⚠️'; ?>
+                    </div>
+
+                    <!-- Title -->
+                    <h1><?php echo htmlspecialchars($title); ?></h1>
+
+                    <!-- Message -->
+                    <p><?php echo htmlspecialchars($message); ?></p>
+
+                    <!-- Booking Summary (only shown on success) -->
+                    <?php if ($type === 'success'): ?>
+                        <div class="booking-summary">
+                            <div class="summary-row">
+                                <span class="summary-label">Name</span>
+                                <span><?php echo htmlspecialchars($GLOBALS['client_name']); ?></span>
+                            </div>
+                            <div class="summary-row">
+                                <span class="summary-label">Car License</span>
+                                <span><?php echo htmlspecialchars($GLOBALS['car_license']); ?></span>
+                            </div>
+                            <div class="summary-row">
+                                <span class="summary-label">Appointment Date</span>
+                                <span><?php echo htmlspecialchars($GLOBALS['appointment_date']); ?></span>
+                            </div>
+                            <div class="summary-row">
+                                <span class="summary-label">Phone</span>
+                                <span><?php echo htmlspecialchars($GLOBALS['phone']); ?></span>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+
+                    <!-- Action Buttons -->
+                    <div class="feedback-actions">
+                        <?php if ($type === 'success'): ?>
+                            <a href="index.php" class="btn btn-gold">
+                                Book Another Appointment
+                            </a>
+                            <a href="mechanics.php" class="btn btn-outline">
+                                View Our Mechanics
+                            </a>
+                        <?php else: ?>
+                            <a href="javascript:history.back()" class="btn btn-gold">
+                                Go Back & Fix
+                            </a>
+                            <a href="index.php" class="btn btn-outline">
+                                Start Over
+                            </a>
+                        <?php endif; ?>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            &copy; <?php echo date("Y"); ?> Hollywood Car Workshop. All rights reserved.
+        </footer>
+
+    </body>
+
+    </html>
+<?php
+    exit();
+}
+?>
